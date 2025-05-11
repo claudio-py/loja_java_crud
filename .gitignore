@@ -10,7 +10,6 @@
 # Eclipse IDE metadata
 *.log
 *.tmp
-*.bak
 *.swp
 *.swo
 *.DS_Store
@@ -31,8 +30,6 @@ Desktop.ini
 **/*-override.yml
 **/docker-compose.override.yml
 
-# Database backup (optional – include only if loja.bak is not meant to be tracked)
-# loja_db/loja.bak
 
 # Logs
 **/errorlog.txt
