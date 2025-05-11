@@ -1,0 +1,56 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_loja
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./loja_db/:/var/opt/mssql/backup
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Recovery is complete. This is an informational message only. No user action is required.' /var/opt/mssql/log/errorlog"]
+      interval: 10s
+      timeout: 5s
+      retries: 10  
+
+  db-restore:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      db: 
+          condition: service_healthy
+    restart: "on-failure"
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+    volumes:
+      - ./loja_db/:/var/opt/mssql/backup
+      - ./init-login.sql:/init-login.sql
+    entrypoint: ["/bin/bash", "-c"]
+    command: >
+      "
+
+      echo 'Wait a moment..' &&
+      sleep 5 &&
+
+      echo 'Restoring database...' &&
+      /opt/mssql-tools/bin/sqlcmd -S db -U SA -P 'YourStrong!Passw0rd' -Q \"
+      RESTORE DATABASE loja
+      FROM DISK = '/var/opt/mssql/backup/loja.bak'
+      WITH MOVE 'loja' TO '/var/opt/mssql/data/loja.mdf',
+           MOVE 'loja_log' TO '/var/opt/mssql/data/loja_log.ldf',
+           REPLACE;
+      \" &&
+
+      echo 'Creating login loja and mapping user...' &&
+      /opt/mssql-tools/bin/sqlcmd -S db -U SA -P 'YourStrong!Passw0rd' -i /init-login.sql
+      "
+
+  app:
+    build: .
+    depends_on:
+       db-restore:
+          condition: service_completed_successfully
+    environment:
+       - JDBC_URL=jdbc:sqlserver://sqlserver_loja:1433;databaseName=loja;encrypt=true;trustServerCertificate=true
+    working_dir: /app
