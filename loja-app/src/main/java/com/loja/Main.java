@@ -1,30 +1,174 @@
 package com.loja;
-/* Consultar todas as pessoas físicas do banco de dados e listar no
-console. */
 
 import java.util.List;
+import java.util.Scanner;
 
 import com.loja.model.PessoaFisica;
 import com.loja.model.PessoaFisicaDAO;
 import com.loja.model.PessoaJuridica;
 import com.loja.model.PessoaJuridicaDAO;
+import com.loja.model.util.ConectorBD;
 
-class Main {
+public class Main {
+
+
     public static void main(String[] args) {
-    	//testIncluirPessoaFisica("JHON RICHA", "3SD78900");
-    	//testExcluirPessoaFisica(19);
-    	testAlterarPessoaFisica(1, "gerivaldo", "3SD7dddd9");
-    //	testListarPessoasFisicas();
-    	//testPessoaFisicaPorId(19);
-    	
-    	
-    	//testIncluirPessoaJuridica("comercio de roupas", "12345678901234");
-    	//testExcluirPessoaJuridica(20);
-    	//testAlterarPessoaJuridica(20, "comercio de roupas", "12345678901234");
-//    	testListarPessoasJuridicas();
-    	//testPessoaJuridicaPorId(20);
+        Main app = new Main();
+        try (Scanner scanner = new Scanner(System.in)) {
+            int opcao;
+            do {
+                System.out.println("1. Incluir");
+                System.out.println("2. Alterar");
+                System.out.println("3. Excluir");
+                System.out.println("4. Buscar por ID");
+                System.out.println("5. Exibir todos");
+                System.out.println("0. Finalizar");
+                System.out.print("Digite a opção desejada: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Por favor, insira um número válido.");
+                    scanner.next();
+                }
+                opcao = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (opcao) {
+                    case 1:
+                        app.handleIncluir(scanner);
+                        break;
+                    case 2:
+                        app.handleAlterar(scanner);
+                        break;
+                    case 3:
+                        app.handleExcluir(scanner);
+                        break;
+                    case 4:
+                        app.handleBuscarPorId(scanner);
+                        break;
+                    case 5:
+                        app.handleExibirTodos(scanner);
+                        break;
+                    case 0:
+                        System.out.println("Finalizado...");
+                        ConectorBD.closeConnection();
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Tente novamente.");
+                }
+            } while (opcao != 0);
+        }
+        
     }
-    
+
+    private void handleIncluir(Scanner scanner) {
+        System.out.println("1. Pessoa Física");
+        System.out.println("2. Pessoa Jurídica");
+        System.out.print("Digite a opção desejada: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        if (opcao == 1) {
+            System.out.print("Digite o nome: ");
+            String nome = scanner.nextLine();
+            System.out.print("Digite o CPF: ");
+            String cpf = scanner.nextLine();
+            testIncluirPessoaFisica(nome, cpf);
+        } else if (opcao == 2) {
+            System.out.print("Digite o nome: ");
+            String nome = scanner.nextLine();
+            System.out.print("Digite o CNPJ: ");
+            String cnpj = scanner.nextLine();
+            testIncluirPessoaJuridica(nome, cnpj);
+        } else {
+            System.out.println("Opção inválida.");
+        }
+    }
+
+    private void handleAlterar(Scanner scanner) {
+        System.out.println("1. Pessoa Física");
+        System.out.println("2. Pessoa Jurídica");
+        System.out.print("Digite a opção desejada: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        if (opcao == 1) {
+            System.out.print("Digite o ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+            System.out.print("Digite o nome: ");
+            String nome = scanner.nextLine();
+            System.out.print("Digite o CPF: ");
+            String cpf = scanner.nextLine();
+            testAlterarPessoaFisica(id, nome, cpf);
+        } else if (opcao == 2) {
+            System.out.print("Digite o ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+            System.out.print("Digite o nome: ");
+            String nome = scanner.nextLine();
+            System.out.print("Digite o CNPJ: ");
+            String cnpj = scanner.nextLine();
+            testAlterarPessoaJuridica(id, nome, cnpj);
+        } else {
+            System.out.println("Opção inválida.");
+        }
+    }
+
+    private void handleExcluir(Scanner scanner) {
+        System.out.println("1. Pessoa Física");
+        System.out.println("2. Pessoa Jurídica");
+        System.out.print("Digite a opção desejada: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        if (opcao == 1) {
+            System.out.print("Digite o ID: ");
+            int id = scanner.nextInt();
+            testExcluirPessoaFisica(id);
+        } else if (opcao == 2) {
+            System.out.print("Digite o ID: ");
+            int id = scanner.nextInt();
+            testExcluirPessoaJuridica(id);
+        } else {
+            System.out.println("Opção inválida.");
+        }
+    }
+
+    private void handleBuscarPorId(Scanner scanner) {
+        System.out.println("1. Pessoa Física");
+        System.out.println("2. Pessoa Jurídica");
+        System.out.print("Digite a opção desejada: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        if (opcao == 1) {
+            System.out.print("Digite o ID: ");
+            int id = scanner.nextInt();
+            testPessoaFisicaPorId(id);
+        } else if (opcao == 2) {
+            System.out.print("Digite o ID: ");
+            int id = scanner.nextInt();
+            testPessoaJuridicaPorId(id);
+        } else {
+            System.out.println("Opção inválida.");
+        }
+    }
+
+    private void handleExibirTodos(Scanner scanner) {
+        System.out.println("1. Pessoa Física");
+        System.out.println("2. Pessoa Jurídica");
+        System.out.print("Digite a opção desejada: ");
+        int opcao = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        if (opcao == 1) {
+            testListarPessoasFisicas();
+        } else if (opcao == 2) {
+            testListarPessoasJuridicas();
+        } else {
+            System.out.println("Opção inválida.");
+        }
+    }
+
     /* Método para listar todas as pessoas físicas do banco de dados */
     static void testListarPessoasFisicas() {
         PessoaFisicaDAO pessoaFisicaDAO = new PessoaFisicaDAO();
@@ -110,4 +254,3 @@ class Main {
 		System.out.println("Pessoa jurídica alterada com sucesso.");
 	}
 }
-

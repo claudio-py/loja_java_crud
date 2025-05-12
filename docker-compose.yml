@@ -48,6 +48,8 @@ services:
 
   app:
     build: .
+    stdin_open: true
+    tty: true
     depends_on:
        db-restore:
           condition: service_completed_successfully
