@@ -1,0 +1,20 @@
+# Ignore the documentation folder
+documentation/
+
+# Ignore the relatorio.pdf file
+relatorio.pdf
+
+# Ignore common unnecessary files and folders
+*.log
+*.tmp
+*.swp
+*.class
+target/
+build/
+out/
+node_modules/
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*.md

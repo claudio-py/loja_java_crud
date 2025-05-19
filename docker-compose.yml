@@ -9,6 +9,7 @@ services:
       - "1433:1433"
     volumes:
       - ./loja_db/:/var/opt/mssql/backup
+      - mssql_data:/var/opt/mssql
     healthcheck:
       test: ["CMD-SHELL", "grep -q 'Recovery is complete. This is an informational message only. No user action is required.' /var/opt/mssql/log/errorlog"]
       interval: 10s
@@ -56,3 +57,6 @@ services:
     environment:
        - JDBC_URL=jdbc:sqlserver://sqlserver_loja:1433;databaseName=loja;encrypt=true;trustServerCertificate=true
     working_dir: /app
+
+volumes:
+  mssql_data:
