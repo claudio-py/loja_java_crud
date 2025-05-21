@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=loja2;encrypt=true;trustServerCertificate=true
+    username: loja
+    password: loja

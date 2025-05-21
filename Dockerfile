@@ -11,7 +11,7 @@ RUN mvn dependency:go-offline -B
 # Stage 2: Run the application using JDK 21
 FROM eclipse-temurin:21-jdk
 WORKDIR /app
-COPY --from=builder /build/target/loja-app-1.0-jar-with-dependencies.jar app.jar
+COPY --from=builder /build/target/loja-app-1.0.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 

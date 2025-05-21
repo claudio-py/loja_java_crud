@@ -1,10 +1,9 @@
 package com.loja.model.entity;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "pessoa_juridica")
-@PrimaryKeyJoinColumn(name = "id_pessoa") // Links to the primary key in `pessoa`
+@Table(name = "juridica")
+@PrimaryKeyJoinColumn(name = "pessoa_id") // Links to the primary key in `pessoa`
 public class PessoaJuridica extends Pessoa {
     private static final long serialVersionUID = 1L;
 

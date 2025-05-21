@@ -1,5 +1,4 @@
 package com.loja.controller;
-
 import com.loja.model.entity.PessoaJuridica;
 import com.loja.service.PessoaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;

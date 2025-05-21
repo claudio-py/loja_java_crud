@@ -1,5 +1,4 @@
 package com.loja.model.entity;
-
 import jakarta.persistence.*;
 import java.io.Serializable;
 
@@ -11,7 +10,7 @@ public abstract class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremented primary key
-    @Column(name = "id_pessoa")
+    @Column(name = "id")
     protected int id;
 
     @Column(nullable = false)

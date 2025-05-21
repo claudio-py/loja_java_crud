@@ -36,10 +36,10 @@ services:
 
       echo 'Restoring database...' &&
       /opt/mssql-tools/bin/sqlcmd -S db -U SA -P 'YourStrong!Passw0rd' -Q \"
-      RESTORE DATABASE loja
-      FROM DISK = '/var/opt/mssql/backup/loja.bak'
-      WITH MOVE 'loja' TO '/var/opt/mssql/data/loja.mdf',
-           MOVE 'loja_log' TO '/var/opt/mssql/data/loja_log.ldf',
+      RESTORE DATABASE loja2
+      FROM DISK = '/var/opt/mssql/backup/loja2.bak'
+      WITH MOVE 'loja2' TO '/var/opt/mssql/data/loja2.mdf',
+           MOVE 'loja2_log' TO '/var/opt/mssql/data/loja2_log.ldf',
            REPLACE;
       \" &&
 
@@ -55,8 +55,10 @@ services:
        db-restore:
           condition: service_completed_successfully
     environment:
-       - JDBC_URL=jdbc:sqlserver://sqlserver_loja:1433;databaseName=loja;encrypt=true;trustServerCertificate=true
+       - SPRING_PROFILES_ACTIVE=docker
     working_dir: /app
+    ports:
+      - "8081:8080"
 
 volumes:
   mssql_data:
