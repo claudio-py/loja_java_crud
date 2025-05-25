@@ -1,4 +1,4 @@
-import NovoProduto from './NovoProduto.tsx';
+import NovoProduto from './view/NovoProduto.tsx';
 import ProdutoList from './view/ProdutoList.tsx';
 import {Routes, Route} from 'react-router-dom'; 
 

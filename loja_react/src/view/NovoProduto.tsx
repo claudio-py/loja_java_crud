@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Produto from "./modelo/Produto";
-import ProdutoRepository from "./repository/ProdutoRepository";
+import Produto from "../model/Produto";
+import ProdutoRepository from "../repository/ProdutoRepository";
 
 export default function NovoProduto() {
   const [nome, setNome] = useState<string>("");
