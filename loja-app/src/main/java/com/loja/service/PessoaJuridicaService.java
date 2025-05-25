@@ -10,14 +10,14 @@ import java.util.List;
 @Service
 public class PessoaJuridicaService {
 
-  @Autowired
-  private PessoaJuridicaRepository repository;
+	@Autowired
+	private PessoaJuridicaRepository repository;
 
-  public List<PessoaJuridica> getAll() {
-    return repository.findAll();
-  }
+	public List<PessoaJuridica> getAll() {
+		return repository.findAll();
+	}
 
-  public PessoaJuridica save(PessoaJuridica pessoaJuridica) {
-    return repository.save(pessoaJuridica);
-  }
+	public PessoaJuridica save(PessoaJuridica pessoaJuridica) {
+		return repository.save(pessoaJuridica);
+	}
 }

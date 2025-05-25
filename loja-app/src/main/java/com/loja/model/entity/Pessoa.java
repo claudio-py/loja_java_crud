@@ -1,4 +1,5 @@
 package com.loja.model.entity;
+
 import jakarta.persistence.*;
 import java.io.Serializable;
 
@@ -6,41 +7,42 @@ import java.io.Serializable;
 @Table(name = "pessoa")
 @Inheritance(strategy = InheritanceType.JOINED) // Defines inheritance mapping
 public abstract class Pessoa implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremented primary key
-    @Column(name = "id")
-    protected int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremented primary key
+	@Column(name = "id")
+	protected int id;
 
-    @Column(nullable = false)
-    protected String nome;
+	@Column(nullable = false)
+	protected String nome;
 
-    public Pessoa() {}
+	public Pessoa() {
+	}
 
-    public Pessoa(String nome) {
-        this.nome = nome;
-    }
+	public Pessoa(String nome) {
+		this.nome = nome;
+	}
 
-    public Pessoa(int id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
+	public Pessoa(int id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
+	// Getters and Setters
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }

@@ -1,4 +1,3 @@
-//b) No arquivo Livro.ts, criar a classe Livro, composta dos campos: codigo e codEditora, numéricos, título e resumo, ambos do tipo texto, e autores, como um vetor de texto    
 interface Livro {
   codigo: number;
   codEditora: number;

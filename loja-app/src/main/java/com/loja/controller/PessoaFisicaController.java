@@ -11,17 +11,17 @@ import java.util.List;
 @RequestMapping("/api/pessoas/fisica")
 public class PessoaFisicaController {
 
-    @Autowired
-    private PessoaFisicaService service;
+	@Autowired
+	private PessoaFisicaService service;
 
-    @GetMapping
-    public List<PessoaFisica> getAll() {
-        return service.getAll();
-    }
+	@GetMapping
+	public List<PessoaFisica> getAll() {
+		return service.getAll();
+	}
 
-    @PostMapping
-    public ResponseEntity<PessoaFisica> createPessoaFisica(@RequestBody PessoaFisica pessoaFisica) {
-        PessoaFisica savedPessoaFisica = service.save(pessoaFisica);
-        return ResponseEntity.ok(savedPessoaFisica);
-    }
+	@PostMapping
+	public ResponseEntity<PessoaFisica> createPessoaFisica(@RequestBody PessoaFisica pessoaFisica) {
+		PessoaFisica savedPessoaFisica = service.save(pessoaFisica);
+		return ResponseEntity.ok(savedPessoaFisica);
+	}
 }

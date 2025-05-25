@@ -59,6 +59,15 @@ services:
     working_dir: /app
     ports:
       - "8081:8080"
+  
+  frontend:
+    build:
+      context: ./loja_react  # adjust path to your Vite app root
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - app
 
 volumes:
   mssql_data:
