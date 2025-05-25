@@ -1,4 +1,4 @@
-import Produto from "../modelo/Produto";
+import Produto from "../model/Produto";
 
 // const API_URL = "http://localhost:8081/api/produtos"; // Replace with your backend URL
 

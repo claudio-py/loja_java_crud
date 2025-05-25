@@ -1,6 +1,6 @@
 // hooks/useProdutos.ts
 import { useEffect, useState } from "react";
-import Produto from "../modelo/Produto";
+import Produto from "../model/Produto";
 import ProdutoRepository from "../repository/ProdutoRepository";
 
 export default function useProdutos() {

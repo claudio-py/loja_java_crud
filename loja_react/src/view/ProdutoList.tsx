@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useProdutos from "../hooks/useProdutos";
 import ProdutoRepository from "../repository/ProdutoRepository";
-import Produto from "../modelo/Produto";
+import Produto from "../model/Produto";
 
 interface ProdutoRowProps {
   produto: Produto;
